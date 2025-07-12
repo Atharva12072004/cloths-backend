@@ -18,8 +18,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
-// Middleware
+// CORS middleware (must be before any routes)
 app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://rewearcloths.netlify.app'
+  ],
+  credentials: true
+}));
+// Handle preflight requests for all routes
+app.options('*', cors({
   origin: [
     'http://localhost:5173',
     'http://localhost:3000',
