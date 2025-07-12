@@ -68,7 +68,7 @@ const upload = multer({
 let users = [
   {
     id: '1',
-    email: 'admin@rewear.com',
+    email: 'admin@clothingswap.com',
     password: bcrypt.hashSync('admin123', 10),
     name: 'Admin User',
     points: 1000,
