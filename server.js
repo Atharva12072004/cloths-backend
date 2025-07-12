@@ -1,18 +1,19 @@
-const express = require('express');
-const cors = require('cors');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs-extra');
-const { v4: uuidv4 } = require('uuid');
-const { body, validationResult } = require('express-validator');
-const dotenv = require('dotenv');
+import express from 'express';
+import cors from 'cors';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs-extra';
+import { v4 as uuidv4 } from 'uuid';
+import { body, validationResult } from 'express-validator';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
-const __filename = __filename;
-const __dirname = __dirname;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
