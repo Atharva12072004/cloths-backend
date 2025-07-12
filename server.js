@@ -470,37 +470,64 @@ app.post('/api/auth/register', validateRegistration, async (req, res) => {
 });
 
 app.post('/api/auth/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
-    // Find user
-    const user = users.find(user => user.email === email);
-    if (!user) {
-      return res.status(400).json({ message: 'Invalid credentials' });
-    }
-
-    // Check password
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) {
-      return res.status(400).json({ message: 'Invalid credentials' });
-    }
-
+  // DEMO: Allow any password for demo users
+  if (
+    (email === 'demo@swapstyle.com') ||
+    (email === 'admin@clothingswap.com')
+  ) {
+    // You can set isAdmin true for admin@clothingswap.com
+    const isAdmin = email === 'admin@clothingswap.com';
+    const demoUser = {
+      id: 'demo',
+      email,
+      name: isAdmin ? 'Admin Demo' : 'Demo User',
+      isAdmin,
+      points: 1000,
+      avatar: null,
+      location: 'Demo City',
+      joinDate: '2024-01-01',
+      swapCount: 0
+    };
     // Generate JWT token
     const token = jwt.sign(
-      { id: user.id, email: user.email, isAdmin: user.isAdmin },
+      { id: demoUser.id, email: demoUser.email, isAdmin: demoUser.isAdmin },
       JWT_SECRET,
       { expiresIn: '7d' }
     );
-
-    const { password: _, ...userWithoutPassword } = user;
-    res.json({
-      message: 'Login successful',
-      user: userWithoutPassword,
+    return res.json({
+      message: 'Demo login successful',
+      user: demoUser,
       token
     });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
   }
+
+  // Find user
+  const user = users.find(user => user.email === email);
+  if (!user) {
+    return res.status(400).json({ message: 'Invalid credentials' });
+  }
+
+  // Check password
+  const isValidPassword = await bcrypt.compare(password, user.password);
+  if (!isValidPassword) {
+    return res.status(400).json({ message: 'Invalid credentials' });
+  }
+
+  // Generate JWT token
+  const token = jwt.sign(
+    { id: user.id, email: user.email, isAdmin: user.isAdmin },
+    JWT_SECRET,
+    { expiresIn: '7d' }
+  );
+
+  const { password: _, ...userWithoutPassword } = user;
+  res.json({
+    message: 'Login successful',
+    user: userWithoutPassword,
+    token
+  });
 });
 
 // User routes
