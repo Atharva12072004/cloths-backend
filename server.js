@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const path = require('path');
-const { fileURLToPath } = require('url');
 const fs = require('fs-extra');
 const { v4: uuidv4 } = require('uuid');
 const { body, validationResult } = require('express-validator');
