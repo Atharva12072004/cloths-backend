@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Backend for ReWear clothing exchange platform",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
@@ -27,4 +26,4 @@
   "keywords": ["clothing", "exchange", "sustainable", "fashion"],
   "author": "ReWear Team",
   "license": "MIT"
-} 
+}
