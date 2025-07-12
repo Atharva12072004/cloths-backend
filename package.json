@@ -17,7 +17,6 @@
     "dotenv": "^16.3.1",
     "express-validator": "^7.0.1",
     "uuid": "^9.0.1",
-    "path": "^0.12.7",
     "fs-extra": "^11.2.0"
   },
   "devDependencies": {
@@ -27,3 +26,4 @@
   "author": "ReWear Team",
   "license": "MIT"
 }
+
