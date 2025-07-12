@@ -24,7 +24,7 @@ app.use(cors({
   origin: [
     'http://localhost:5173',
     'http://localhost:3000',
-    'https://your-app-name.netlify.app'
+    'https://rewearcloths.netlify.app'
   ],
   credentials: true
 }));
